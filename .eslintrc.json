@@ -11,6 +11,7 @@
     "comma-dangle": "off",
     "react/jsx-filename-extension": "off",
     "linebreak-style": 0,
+    // "indent": ["error", 4],
     // "arrow-parens": ["error", "always"],
     "prettier/prettier": "error"
   }
