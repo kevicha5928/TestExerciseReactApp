@@ -28,7 +28,7 @@ function Exercises({
   // console.log(exercises);
   return (
     <Grid container spacing={2}>
-      <Grid item sm>
+      <Grid item xs={12} sm={6}>
         <LeftPane
           styles={styles.Paper}
           exercises={exercises}
@@ -38,7 +38,7 @@ function Exercises({
           onSelectEdit={onSelectEdit}
         />
       </Grid>
-      <Grid item sm>
+      <Grid item xs={12} sm={6}>
         <RightPane
           styles={styles.Paper}
           exercise={exercise}

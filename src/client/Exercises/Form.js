@@ -10,18 +10,23 @@ import {
   Button
 } from "@material-ui/core";
 
-const styles = theme =>
-  console.log(theme) || {
+const styles = theme => ({
+  FormControl: {
+    width: 500,
+    textAlign: "left"
+  },
+  "@media (max-width: 600px)": {
     FormControl: {
-      width: 500,
+      width: 200,
       textAlign: "left"
-    },
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center"
     }
-  };
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  }
+});
 // a controlled component. state is managed with in this component
 
 class Form extends Component {

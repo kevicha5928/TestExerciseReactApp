@@ -3,6 +3,7 @@ import "./app.css";
 import { Header, Footer } from "./Layout";
 import Exercises from "./Exercises/Exercises";
 import { muscles, exercises } from "../store";
+import { CssBaseline } from "@material-ui/core";
 
 export default class App extends Component {
   state = { username: null, exercises, exercise: {} };
@@ -85,6 +86,7 @@ export default class App extends Component {
 
     return (
       <Fragment>
+        <CssBaseline />
         <Header
           muscles={muscles}
           onExerciseCreate={this.handleExerciseCreate}
