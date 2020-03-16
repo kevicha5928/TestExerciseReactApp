@@ -4,16 +4,6 @@ import { Grid } from "@material-ui/core";
 import LeftPane from "./LeftPane";
 import RightPane from "./RightPane";
 
-const styles = {
-  Paper: {
-    padding: 20,
-    marginTop: 10,
-    marginBottom: 10,
-    height: 500,
-    overflowY: "auto"
-  }
-};
-
 function Exercises({
   muscles,
   exercises,
@@ -30,7 +20,6 @@ function Exercises({
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6}>
         <LeftPane
-          styles={styles.Paper}
           exercises={exercises}
           category={category}
           onSelect={onSelect}
@@ -40,7 +29,6 @@ function Exercises({
       </Grid>
       <Grid item xs={12} sm={6}>
         <RightPane
-          styles={styles.Paper}
           exercise={exercise}
           editMode={editMode}
           muscles={muscles}

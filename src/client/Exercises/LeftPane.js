@@ -7,29 +7,46 @@ import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
-  IconButton
+  IconButton,
+  makeStyles
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 
-import "./LeftPane.css";
+// import "./LeftPane.css";
 
-function LeftPane({
-  styles,
-  exercises,
-  category,
-  onSelect,
-  onDelete,
-  onSelectEdit
-}) {
+const useStyles = makeStyles({
+  Paper: {
+    padding: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    height: 500,
+    overflowY: "auto"
+  },
+  "@media (max-width: 600px)": {
+    Paper: {
+      padding: 20,
+      marginTop: 10,
+      marginBottom: 10,
+      height: 300,
+      overflowY: "auto"
+    }
+  },
+  poo: {
+    textTransform: "capitalize",
+    textAlign: "left"
+  }
+});
+
+function LeftPane({ exercises, category, onSelect, onDelete, onSelectEdit }) {
   // console.log(exercises);
-
+  const classes = useStyles();
   const renderItems = ([muscle, relatedExercises]) => {
     // console.log(muscle, relatedExercises);
     if (!category || category === muscle) {
       return (
         <Fragment key={muscle}>
-          <Typography variant="h4" className="poo">
+          <Typography variant="h4" className={classes.poo}>
             {muscle}
           </Typography>
           <List component="ul">
@@ -57,7 +74,7 @@ function LeftPane({
     return null;
   };
 
-  return <Paper style={styles}>{exercises.map(renderItems)}</Paper>;
+  return <Paper className={classes.Paper}>{exercises.map(renderItems)}</Paper>;
 }
 
 LeftPane.propTypes = {

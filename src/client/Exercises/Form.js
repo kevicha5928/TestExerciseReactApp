@@ -105,7 +105,11 @@ class Form extends Component {
         {/* <Button color="primary" onClick={this.handleToggle}>
           Cancel
         </Button> */}
-        <Button color="primary" onClick={this.handleSubmit}>
+        <Button
+          color="primary"
+          onClick={this.handleSubmit}
+          disabled={!title || !muscles}
+        >
           {exercise ? "Edit" : "Create"}
         </Button>
       </form>

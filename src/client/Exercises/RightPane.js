@@ -1,12 +1,33 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { Paper, Typography } from "@material-ui/core";
+import { Paper, Typography, makeStyles } from "@material-ui/core";
 import Form from "./Form";
-import "./LeftPane.css";
+
+const useStyles = makeStyles({
+  Paper: {
+    padding: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    height: 500,
+    overflowY: "auto"
+  },
+  "@media (max-width: 600px)": {
+    Paper: {
+      padding: 20,
+      marginTop: 10,
+      marginBottom: 10,
+      height: 300,
+      overflowY: "auto"
+    }
+  },
+  poo: {
+    textTransform: "capitalize",
+    textAlign: "left"
+  }
+});
 
 function RightPane({
   muscles,
-  styles,
   exercise,
   exercise: {
     title = "Welcome!!!",
@@ -15,16 +36,15 @@ function RightPane({
   editMode,
   onEdit
 }) {
+  const classes = useStyles();
   // console.log(exercise);
   return (
-    <Paper style={styles}>
+    <Paper className={classes.Paper}>
+      <Typography variant="h2">{title}</Typography>
       {editMode ? (
         <Form muscles={muscles} onSubmit={onEdit} exercise={exercise} />
       ) : (
-        <Fragment>
-          <Typography variant="h2">{title}</Typography>
-          <Typography variant="body1">{description}</Typography>
-        </Fragment>
+        <Typography variant="body1">{description}</Typography>
       )}
     </Paper>
   );
