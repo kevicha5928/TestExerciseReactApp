@@ -15,13 +15,24 @@ import EditIcon from "@material-ui/icons/Edit";
 
 // import "./LeftPane.css";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   Paper: {
     padding: 20,
     marginTop: 10,
     marginBottom: 10,
     height: 500,
-    overflowY: "auto"
+    overflowY: "auto",
+    "&::-webkit-scrollbar": {
+      width: "1em"
+    },
+    "&::-webkit-scrollbar-track": {
+      boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+      webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)"
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: theme.palette.primary.dark,
+      outline: "1px solid slategrey"
+    }
   },
   "@media (max-width: 600px)": {
     Paper: {
@@ -36,7 +47,7 @@ const useStyles = makeStyles({
     textTransform: "capitalize",
     textAlign: "left"
   }
-});
+}));
 
 function LeftPane({ exercises, category, onSelect, onDelete, onSelectEdit }) {
   // console.log(exercises);
@@ -46,7 +57,7 @@ function LeftPane({ exercises, category, onSelect, onDelete, onSelectEdit }) {
     if (!category || category === muscle) {
       return (
         <Fragment key={muscle}>
-          <Typography variant="h4" className={classes.poo}>
+          <Typography variant="h4" className={classes.poo} color="secondary">
             {muscle}
           </Typography>
           <List component="ul">
@@ -58,10 +69,16 @@ function LeftPane({ exercises, category, onSelect, onDelete, onSelectEdit }) {
               >
                 <ListItemText primary={exercise.title} />
                 <ListItemSecondaryAction>
-                  <IconButton onClick={() => onSelectEdit(exercise.id)}>
+                  <IconButton
+                    onClick={() => onSelectEdit(exercise.id)}
+                    color="primary"
+                  >
                     <EditIcon />
                   </IconButton>
-                  <IconButton onClick={() => onDelete(exercise.id)}>
+                  <IconButton
+                    onClick={() => onDelete(exercise.id)}
+                    color="primary"
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -78,11 +95,6 @@ function LeftPane({ exercises, category, onSelect, onDelete, onSelectEdit }) {
 }
 
 LeftPane.propTypes = {
-  styles: PropTypes.shape({
-    padding: PropTypes.number,
-    marginTop: PropTypes.number,
-    marginBottom: PropTypes.number
-  }).isRequired,
   exercises: PropTypes.arrayOf(PropTypes.array).isRequired,
   category: PropTypes.string,
   onSelect: PropTypes.func.isRequired

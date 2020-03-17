@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Tabs, Tab, useMediaQuery, useTheme } from "@material-ui/core";
+import { AppBar, Tabs, Tab, useMediaQuery, useTheme } from "@material-ui/core";
 import PropTypes from "prop-types";
 // import useMediaQuery from '@material-ui/core/useMediaQuery';
 // import { useTheme } from '@material-ui/core/styles';
@@ -19,12 +19,12 @@ function Footer({ muscles, onSelect, category }) {
     onSelect(indexS === 0 ? "" : muscles[indexS - 1]);
   };
   return (
-    <Paper>
+    <AppBar position="static">
       <Tabs
         value={index}
         onChange={onIndexSelect}
-        indicatorColor="primary"
-        textColor="primary"
+        indicatorColor="secondary"
+        textColor="secondary"
         centered={!mobile}
         variant={mobile ? "scrollable" : "standard"}
         scrollButtons="off"
@@ -34,7 +34,7 @@ function Footer({ muscles, onSelect, category }) {
           <Tab label={muscle} key={muscle} />
         ))}
       </Tabs>
-    </Paper>
+    </AppBar>
   );
 }
 Footer.propTypes = {

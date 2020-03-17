@@ -30,7 +30,7 @@ class CreateDialog extends Component {
     // console.log(categories);
     return (
       <Fragment>
-        <IconButton onClick={this.handleToggle} size="medium">
+        <IconButton onClick={this.handleToggle} size="medium" color="secondary">
           <AddCircleIcon />
         </IconButton>
         <Dialog open={open} onClose={this.handleToggle}>

@@ -40,7 +40,9 @@ function RightPane({
   // console.log(exercise);
   return (
     <Paper className={classes.Paper}>
-      <Typography variant="h2">{title}</Typography>
+      <Typography variant="h2" color="secondary">
+        {title}
+      </Typography>
       {editMode ? (
         <Form muscles={muscles} onSubmit={onEdit} exercise={exercise} />
       ) : (
@@ -51,11 +53,6 @@ function RightPane({
 }
 
 RightPane.propTypes = {
-  styles: PropTypes.shape({
-    padding: PropTypes.number,
-    marginTop: PropTypes.number,
-    marginBottom: PropTypes.number
-  }).isRequired,
   exercise: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string

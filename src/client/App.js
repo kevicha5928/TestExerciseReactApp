@@ -3,10 +3,26 @@ import "./app.css";
 import { Header, Footer } from "./Layout";
 import Exercises from "./Exercises/Exercises";
 import { muscles, exercises } from "../store";
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline, ThemeProvider, createMuiTheme } from "@material-ui/core";
+import { red, amber } from "@material-ui/core/colors";
 
 export default class App extends Component {
-  state = { username: null, exercises, exercise: {} };
+  state = {
+    username: null,
+    exercises,
+    exercise: {},
+    theme: {
+      palette: {
+        primary: red,
+        secondary: {
+          main: amber.A400,
+          light: amber[200],
+          dark: amber[800]
+        },
+        type: "light"
+      }
+    }
+  };
 
   componentDidMount() {
     fetch("/api/getUsername")
@@ -78,41 +94,52 @@ export default class App extends Component {
       exercise
     }));
   };
+  handleThemeToggle = () => {
+    this.setState(({ theme }) => ({
+      theme: {
+        ...theme.palette,
+        palette: {
+          ...theme.palette,
+          type: theme.palette.type === "light" ? "dark" : "light"
+        }
+      }
+    }));
+  };
 
   render() {
     // console.log(this.getExercisesByMuscles());
     const sortedExercises = this.getExercisesByMuscles();
     const { username, category, exercise } = this.state;
+    const theme = createMuiTheme(this.state.theme);
 
     return (
-      <Fragment>
-        <CssBaseline />
-        <Header
-          muscles={muscles}
-          onExerciseCreate={this.handleExerciseCreate}
-        />
-        {username ? (
-          <h1>{`Hello Cello ${username}`}</h1>
-        ) : (
-          <h1>Loading.. please wait!</h1>
-        )}
-        <Exercises
-          exercises={sortedExercises}
-          exercise={exercise}
-          category={category}
-          muscles={muscles}
-          onSelect={this.handleExerciseSelect}
-          onDelete={this.handleExerciseDelete}
-          onSelectEdit={this.handleSelectEdit}
-          onEdit={this.handleExerciseEdit}
-          editMode={this.state.editMode}
-        />
-        <Footer
-          muscles={muscles}
-          category={category}
-          onSelect={this.handleCategorySelect}
-        />
-      </Fragment>
+      <ThemeProvider theme={theme}>
+        <Fragment>
+          <CssBaseline />
+          <Header
+            muscles={muscles}
+            onExerciseCreate={this.handleExerciseCreate}
+            onThemeToggle={this.handleThemeToggle}
+          />
+
+          <Exercises
+            exercises={sortedExercises}
+            exercise={exercise}
+            category={category}
+            muscles={muscles}
+            onSelect={this.handleExerciseSelect}
+            onDelete={this.handleExerciseDelete}
+            onSelectEdit={this.handleSelectEdit}
+            onEdit={this.handleExerciseEdit}
+            editMode={this.state.editMode}
+          />
+          <Footer
+            muscles={muscles}
+            category={category}
+            onSelect={this.handleCategorySelect}
+          />
+        </Fragment>
+      </ThemeProvider>
     );
   }
 }
