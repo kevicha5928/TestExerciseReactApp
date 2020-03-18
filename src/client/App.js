@@ -1,9 +1,14 @@
 import React, { Component, Fragment } from "react";
-import "./app.css";
+// import "./app.css";
 import { Header, Footer } from "./Layout";
 import Exercises from "./Exercises/Exercises";
 import { muscles, exercises } from "../store";
-import { CssBaseline, ThemeProvider, createMuiTheme } from "@material-ui/core";
+import {
+  CssBaseline,
+  ThemeProvider,
+  createMuiTheme,
+  responsiveFontSizes
+} from "@material-ui/core";
 import { red, amber } from "@material-ui/core/colors";
 
 export default class App extends Component {
@@ -19,7 +24,7 @@ export default class App extends Component {
           light: amber[200],
           dark: amber[800]
         },
-        type: "light"
+        type: "dark"
       }
     }
   };
@@ -109,8 +114,9 @@ export default class App extends Component {
   render() {
     // console.log(this.getExercisesByMuscles());
     const sortedExercises = this.getExercisesByMuscles();
-    const { username, category, exercise } = this.state;
-    const theme = createMuiTheme(this.state.theme);
+    const { category, exercise } = this.state;
+    let theme = createMuiTheme(this.state.theme);
+    theme = responsiveFontSizes(theme);
 
     return (
       <ThemeProvider theme={theme}>

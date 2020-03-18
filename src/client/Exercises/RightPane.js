@@ -3,28 +3,29 @@ import PropTypes from "prop-types";
 import { Paper, Typography, makeStyles } from "@material-ui/core";
 import Form from "./Form";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   Paper: {
-    padding: 20,
-    marginTop: 10,
-    marginBottom: 10,
-    height: 500,
-    overflowY: "auto"
-  },
-  "@media (max-width: 600px)": {
-    Paper: {
-      padding: 20,
-      marginTop: 10,
-      marginBottom: 10,
-      height: 300,
+    [theme.breakpoints.up("sm")]: {
+      padding: "2em",
+      marginTop: "1em",
+      marginBottom: "1em",
+      marginRight: ".5em",
+      height: "calc(100% - 2em)"
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: "1em",
+      margin: "0.5em",
+      // marginBottom: ".25em",
+      height: "calc(100% - 1em)",
       overflowY: "auto"
-    }
+    },
+    overflowY: "auto"
   },
   poo: {
     textTransform: "capitalize",
     textAlign: "left"
   }
-});
+}));
 
 function RightPane({
   muscles,

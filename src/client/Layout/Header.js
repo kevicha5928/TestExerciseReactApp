@@ -14,6 +14,15 @@ const useStyles = makeStyles({
   header: {
     flex: 1,
     textAlign: "left"
+  },
+  "@media (max-width: 600px)": {
+    Paper: {
+      padding: 20,
+      marginTop: 10,
+      marginBottom: 10,
+      height: 300,
+      overflowY: "auto"
+    }
   }
 });
 
@@ -34,17 +43,15 @@ function Header({ muscles, onExerciseCreate, onThemeToggle }) {
         <Typography variant="h4" color="inherit" className={classes.header}>
           Exercise Database
         </Typography>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={state.checkedB}
-              onChange={handleChange("checkedB")}
-              value="checkedB"
-              color="secondary"
-            />
-          }
-          label="Toggle Dark Mode"
+        <Switch
+          checked={state.checkedB}
+          onChange={handleChange("checkedB")}
+          value="checkedB"
+          color="secondary"
         />
+        <Typography variant="h6" color="inherit">
+          Toggle Dark Mode
+        </Typography>
         <CreateDialog muscles={muscles} onCreate={onExerciseCreate} />
       </Toolbar>
     </AppBar>

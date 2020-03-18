@@ -1,8 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Grid } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import LeftPane from "./LeftPane";
 import RightPane from "./RightPane";
+
+const useStyles = makeStyles(theme => ({
+  exerciseContainer: {
+    [theme.breakpoints.down("xs")]: {
+      height: "calc(100% - 108px)"
+    },
+    [theme.breakpoints.up("sm")]: {
+      height: "calc(100% - 112px)"
+    }
+  },
+  itemContainer: {
+    [theme.breakpoints.down("xs")]: {
+      height: "50%"
+    }
+  }
+}));
 
 function Exercises({
   muscles,
@@ -15,10 +31,11 @@ function Exercises({
   onEdit,
   editMode
 }) {
+  const classes = useStyles();
   // console.log(exercises);
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} sm={6}>
+    <Grid container className={classes.exerciseContainer}>
+      <Grid item xs={12} sm={6} className={classes.itemContainer}>
         <LeftPane
           exercises={exercises}
           category={category}
@@ -27,7 +44,7 @@ function Exercises({
           onSelectEdit={onSelectEdit}
         />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={6} className={classes.itemContainer}>
         <RightPane
           exercise={exercise}
           editMode={editMode}

@@ -17,10 +17,20 @@ import EditIcon from "@material-ui/icons/Edit";
 
 const useStyles = makeStyles(theme => ({
   Paper: {
-    padding: 20,
-    marginTop: 10,
-    marginBottom: 10,
-    height: 500,
+    [theme.breakpoints.up("sm")]: {
+      padding: "2em",
+      marginTop: "1em",
+      marginBottom: "1em",
+      marginRight: ".5em",
+      height: "calc(100% - 2em)"
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: "1em",
+      margin: "0.5em",
+      // marginBottom: ".25em",
+      height: "calc(100% - 1em)",
+      overflowY: "auto"
+    },
     overflowY: "auto",
     "&::-webkit-scrollbar": {
       width: "1em"
@@ -32,15 +42,6 @@ const useStyles = makeStyles(theme => ({
     "&::-webkit-scrollbar-thumb": {
       backgroundColor: theme.palette.primary.dark,
       outline: "1px solid slategrey"
-    }
-  },
-  "@media (max-width: 600px)": {
-    Paper: {
-      padding: 20,
-      marginTop: 10,
-      marginBottom: 10,
-      height: 300,
-      overflowY: "auto"
     }
   },
   poo: {

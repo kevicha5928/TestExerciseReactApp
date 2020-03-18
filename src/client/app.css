@@ -3,6 +3,14 @@ h1 {
 }
 
 body {
-  text-align: center;
-  margin: auto;
+  height: inherit;
+}
+
+#root {
+  height: inherit;
+}
+
+html {
+  height: 100%;
+  width: 100%;
 }
