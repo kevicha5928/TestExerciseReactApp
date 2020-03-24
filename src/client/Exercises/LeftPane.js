@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import { Consumer, withContext } from "../context";
 
 // import "./LeftPane.css";
 
@@ -27,7 +28,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("xs")]: {
       padding: "1em",
       margin: "0.5em",
-      // marginBottom: ".25em",
       height: "calc(100% - 1em)",
       overflowY: "auto"
     },
@@ -50,59 +50,62 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LeftPane({ exercises, category, onSelect, onDelete, onSelectEdit }) {
-  // console.log(exercises);
+function LeftPane({
+  sortedExercises,
+  category,
+  onSelect,
+  onDelete,
+  onSelectEdit
+}) {
   const classes = useStyles();
-  const renderItems = ([muscle, relatedExercises]) => {
-    // console.log(muscle, relatedExercises);
-    if (!category || category === muscle) {
-      return (
-        <Fragment key={muscle}>
-          <Typography variant="h4" className={classes.poo} color="secondary">
-            {muscle}
-          </Typography>
-          <List component="ul">
-            {relatedExercises.map(exercise => (
-              <ListItem
-                button
-                key={exercise.id}
-                onClick={() => onSelect(exercise.id)}
+  return (
+    <Paper className={classes.Paper}>
+      {sortedExercises.map(([muscle, relatedExercises]) => {
+        if (!category || category === muscle) {
+          return (
+            <Fragment key={muscle}>
+              <Typography
+                variant="h4"
+                className={classes.poo}
+                color="secondary"
               >
-                <ListItemText primary={exercise.title} />
-                <ListItemSecondaryAction>
-                  <IconButton
-                    onClick={() => onSelectEdit(exercise.id)}
-                    color="primary"
+                {muscle}
+              </Typography>
+              <List component="ul">
+                {relatedExercises.map(exercise => (
+                  <ListItem
+                    button
+                    key={exercise.id}
+                    onClick={() => onSelect(exercise.id)}
                   >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    onClick={() => onDelete(exercise.id)}
-                    color="primary"
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
-          </List>
-        </Fragment>
-      );
-    }
-    return null;
-  };
-
-  return <Paper className={classes.Paper}>{exercises.map(renderItems)}</Paper>;
+                    <ListItemText primary={exercise.title} />
+                    <ListItemSecondaryAction>
+                      <IconButton
+                        onClick={() => onSelectEdit(exercise.id)}
+                        color="primary"
+                      >
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => onDelete(exercise.id)}
+                        color="primary"
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ))}
+              </List>
+            </Fragment>
+          );
+        }
+      })}
+    </Paper>
+  );
 }
 
-LeftPane.propTypes = {
-  exercises: PropTypes.arrayOf(PropTypes.array).isRequired,
-  category: PropTypes.string,
-  onSelect: PropTypes.func.isRequired
-};
+LeftPane.propTypes = {};
 
-LeftPane.defaultProps = {
-  category: null
-};
+LeftPane.defaultProps = {};
 
-export default LeftPane;
+export default withContext(LeftPane);

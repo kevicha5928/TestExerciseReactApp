@@ -3,6 +3,7 @@ import React, { Component, Fragment } from "react";
 import { Header, Footer } from "./Layout";
 import Exercises from "./Exercises/Exercises";
 import { muscles, exercises } from "../store";
+import { Provider } from "./context";
 import {
   CssBaseline,
   ThemeProvider,
@@ -111,41 +112,49 @@ export default class App extends Component {
     }));
   };
 
+  getContext = () => ({
+    muscles,
+    ...this.state,
+    onCreate: this.handleExerciseCreate,
+    onSelect: this.handleExerciseSelect,
+    onDelete: this.handleExerciseDelete,
+    onSelectEdit: this.handleSelectEdit,
+    sortedExercises: this.getExercisesByMuscles(),
+    onThemeToggle: this.handleThemeToggle
+  });
+
   render() {
     // console.log(this.getExercisesByMuscles());
-    const sortedExercises = this.getExercisesByMuscles();
+    // const sortedExercises = this.getExercisesByMuscles();
     const { category, exercise } = this.state;
     let theme = createMuiTheme(this.state.theme);
     theme = responsiveFontSizes(theme);
 
     return (
-      <ThemeProvider theme={theme}>
-        <Fragment>
-          <CssBaseline />
-          <Header
-            muscles={muscles}
-            onExerciseCreate={this.handleExerciseCreate}
-            onThemeToggle={this.handleThemeToggle}
-          />
-
-          <Exercises
-            exercises={sortedExercises}
-            exercise={exercise}
-            category={category}
-            muscles={muscles}
-            onSelect={this.handleExerciseSelect}
-            onDelete={this.handleExerciseDelete}
-            onSelectEdit={this.handleSelectEdit}
-            onEdit={this.handleExerciseEdit}
-            editMode={this.state.editMode}
-          />
-          <Footer
-            muscles={muscles}
-            category={category}
-            onSelect={this.handleCategorySelect}
-          />
-        </Fragment>
-      </ThemeProvider>
+      <Provider value={this.getContext()}>
+        <ThemeProvider theme={theme}>
+          <Fragment>
+            <CssBaseline />
+            <Header />
+            <Exercises
+              // exercises={sortedExercises}
+              exercise={exercise}
+              // category={category}
+              muscles={muscles}
+              onSelect={this.handleExerciseSelect}
+              onDelete={this.handleExerciseDelete}
+              onSelectEdit={this.handleSelectEdit}
+              onEdit={this.handleExerciseEdit}
+              editMode={this.state.editMode}
+            />
+            <Footer
+              muscles={muscles}
+              category={category}
+              onSelect={this.handleCategorySelect}
+            />
+          </Fragment>
+        </ThemeProvider>
+      </Provider>
     );
   }
 }

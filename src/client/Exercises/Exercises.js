@@ -17,6 +17,11 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("xs")]: {
       height: "50%"
     }
+  },
+  "@global": {
+    "html, body, #root": {
+      height: "100%"
+    }
   }
 }));
 
@@ -25,9 +30,6 @@ function Exercises({
   exercises,
   category,
   exercise,
-  onSelect,
-  onDelete,
-  onSelectEdit,
   onEdit,
   editMode
 }) {
@@ -37,11 +39,11 @@ function Exercises({
     <Grid container className={classes.exerciseContainer}>
       <Grid item xs={12} sm={6} className={classes.itemContainer}>
         <LeftPane
-          exercises={exercises}
-          category={category}
-          onSelect={onSelect}
-          onDelete={onDelete}
-          onSelectEdit={onSelectEdit}
+        // exercises={exercises}
+        // category={category}
+        // onSelect={onSelect}
+        // onDelete={onDelete}
+        // onSelectEdit={onSelectEdit}
         />
       </Grid>
       <Grid item xs={12} sm={6} className={classes.itemContainer}>
@@ -56,8 +58,6 @@ function Exercises({
   );
 }
 
-Exercises.propTypes = {
-  exercises: PropTypes.arrayOf(PropTypes.array).isRequired
-};
+Exercises.propTypes = {};
 
 export default Exercises;

@@ -4,29 +4,19 @@ import {
   Toolbar,
   Typography,
   makeStyles,
-  FormControlLabel,
   Switch
 } from "@material-ui/core";
 import CreateDialog from "../Exercises/CreateDialog";
-// import "./Layout.css";
+import { withContext } from "../context";
 
 const useStyles = makeStyles({
   header: {
     flex: 1,
     textAlign: "left"
-  },
-  "@media (max-width: 600px)": {
-    Paper: {
-      padding: 20,
-      marginTop: 10,
-      marginBottom: 10,
-      height: 300,
-      overflowY: "auto"
-    }
   }
 });
 
-function Header({ muscles, onExerciseCreate, onThemeToggle }) {
+function Header({ onThemeToggle }) {
   const classes = useStyles();
   const [state, setState] = useState({
     checkedA: true,
@@ -52,10 +42,10 @@ function Header({ muscles, onExerciseCreate, onThemeToggle }) {
         <Typography variant="h6" color="inherit">
           Toggle Dark Mode
         </Typography>
-        <CreateDialog muscles={muscles} onCreate={onExerciseCreate} />
+        <CreateDialog />
       </Toolbar>
     </AppBar>
   );
 }
 
-export default Header;
+export default withContext(Header);

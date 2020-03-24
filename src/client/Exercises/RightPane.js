@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("xs")]: {
       padding: "1em",
       margin: "0.5em",
-      // marginBottom: ".25em",
       height: "calc(100% - 1em)",
       overflowY: "auto"
     },

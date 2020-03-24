@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Form from "./Form";
+import { Consumer, withContext } from "../context";
 
 class CreateDialog extends Component {
   state = {
@@ -27,7 +28,6 @@ class CreateDialog extends Component {
     const { open } = this.state;
     const { muscles } = this.props;
 
-    // console.log(categories);
     return (
       <Fragment>
         <IconButton onClick={this.handleToggle} size="medium" color="secondary">
@@ -53,4 +53,4 @@ CreateDialog.propTypes = {};
 
 CreateDialog.defaultProps = {};
 
-export default CreateDialog;
+export default withContext(CreateDialog);
